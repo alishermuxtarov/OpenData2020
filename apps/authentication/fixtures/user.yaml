@@ -1,0 +1,14 @@
+- model: authentication.user
+  pk: 1
+  fields:
+    password: pbkdf2_sha256$180000$iZ9tX0Unrbx4$3RvAXNUGRBIyfHEbW7eHkE2FKbZDR6x2CZ2SQDC42gA=
+    is_superuser: false
+    username: simple_user
+
+- model: authentication.user
+  pk: 2
+  fields:
+    password: pbkdf2_sha256$180000$iZ9tX0Unrbx4$3RvAXNUGRBIyfHEbW7eHkE2FKbZDR6x2CZ2SQDC42gA=
+    is_superuser: false
+    is_active: false
+    username: inactive_user

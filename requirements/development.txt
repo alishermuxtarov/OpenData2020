@@ -1,0 +1,9 @@
+ipython
+requests
+django-extensions
+Werkzeug
+pylint
+pylint-django
+django-stubs
+djangorestframework-stubs
+mysqlclient

@@ -1,0 +1,38 @@
+[MASTER]
+profile=no
+persistent=yes
+ignore=migrations,tests.py,config,utils
+cache-size=500
+init-hook='import sys; sys.path.append("apps")'
+
+
+[MESSAGES CONTROL]
+disable=C0114,C0115,C0116,R0901,R1705,C0103,W0221,R0903,W0223
+
+
+[SIMILARITIES]
+min-similarity-lines=6
+ignore-comments=yes
+ignore-docstrings=yes
+
+
+[MISCELLANEOUS]
+notes=FIXME,XXX,TODO
+
+
+[FORMAT]
+max-line-length=120
+max-module-lines=500
+indent-string='    '
+
+
+[DESIGN]
+max-args=6
+max-locals=15
+max-returns=6
+max-branches=12
+max-statements=50
+max-parents=7
+max-attributes=7
+min-public-methods=1
+max-public-methods=20

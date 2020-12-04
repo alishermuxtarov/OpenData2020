@@ -1,0 +1,12 @@
+-
+    model: "authentication.Token"
+    pk: 1
+    fields:
+        key: "bd8eab5971cdfea2c25763752dbc4f15c98ad9e2"
+        user: 1
+-
+    model: "authentication.Token"
+    pk: 2
+    fields:
+        key: "bd8eab5971cdfea2c25763752dbc4f15c98ad9e3"
+        user: 2
