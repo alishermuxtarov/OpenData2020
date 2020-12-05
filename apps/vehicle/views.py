@@ -47,7 +47,6 @@ class RecommendationsByParameters(APIView):
 
     def get(self, request, *args, **kwargs):
         parameters = VehicleParametersValidator.check(request.GET)
-        print('>>>', parameters)
         model = None
         model_name = parameters.get('model_name', None)
         model_id = parameters.get('model_id', None)
@@ -64,6 +63,8 @@ class RecommendationsByParameters(APIView):
 
         if not model:
             raise Http404()
+        else:
+            model_id = model.pk
 
         try:
             parameters.pop('model_id')
