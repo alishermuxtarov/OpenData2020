@@ -3,6 +3,7 @@ from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
+from vehicle.management.commands.aggregate import Command
 from vehicle.models import VehicleAd
 from vehicle.serializers import UrlSerializer, PriceRecommendationsSerializer, VehicleAdSerializer
 
@@ -13,6 +14,7 @@ class RecommendationsByURL(APIView):
 
     def get(self, request, *args, **kwargs):
         url = UrlSerializer.check(request.GET).get('url', None)
+        Command().parse_url(url)
         try:
             ad = VehicleAd.objects.get(url=url)
             similar_ads = VehicleAd.objects.similar_vehicles(ad)
