@@ -14,7 +14,9 @@ class RecommendationsByURL(APIView):
 
     def get(self, request, *args, **kwargs):
         url = UrlSerializer.check(request.GET).get('url', None)
-        Command().parse_url(url)
+        command = Command()
+        command.load_defaults()
+        command.parse_url(url)
         try:
             ad = VehicleAd.objects.get(url=url)
             similar_ads = VehicleAd.objects.similar_vehicles(ad)
