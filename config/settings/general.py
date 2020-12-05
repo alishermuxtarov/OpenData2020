@@ -137,3 +137,5 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
     'django.contrib.staticfiles.finders.FileSystemFinder',
 )
+
+TOKEN = '1328902935:AAEDpGr-eaNc3FGUD8I1v_IA5LYB-uPzSBE'

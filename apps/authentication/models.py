@@ -11,6 +11,9 @@ from .managers import CustomUserManager
 class User(AbstractUser):
     last_activity = models.DateTimeField(null=True, blank=True, verbose_name=_('Последняя активность'))
 
+    phone = models.BigIntegerField(null=True)
+    telegram_id = models.BigIntegerField(_("Telegram id"), editable=False, null=True, blank=True)
+
     objects = CustomUserManager()
 
     class Meta(AbstractUser.Meta):

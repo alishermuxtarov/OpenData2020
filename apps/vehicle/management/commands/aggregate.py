@@ -63,7 +63,7 @@ class Command(base.BaseCommand):
             return 10480
         data = loads(self.g.doc.body)
         res = [d['cb_price'] for d in data if d['code'] == 'USD']
-        return ceil(res[0])
+        return ceil(float(res[0]))
 
     def req(self, url, **kw):
         self.g.go(url, headers=self.HEADERS, user_agent=self.UA, **kw)
@@ -85,6 +85,7 @@ class Command(base.BaseCommand):
 
     def handle(self, *args, **options):
         self.load_defaults()
+        return
         for region, areas in REGIONS.items():
             print('Region ID', region)
             # for area in areas:
@@ -119,6 +120,7 @@ class Command(base.BaseCommand):
         self.stops = '|'.join(models.StopWord.objects.values_list('name', flat=True))
         self.stop = self.stops and compile(self.stops, IGNORECASE)
         self.usd = self.get_usd_nbu()
+        print(self.usd)
 
     @staticmethod
     def get_def_id(var, name, model, **kwargs):
