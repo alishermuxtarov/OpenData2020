@@ -85,7 +85,6 @@ class Command(base.BaseCommand):
 
     def handle(self, *args, **options):
         self.load_defaults()
-        return
         for region, areas in REGIONS.items():
             print('Region ID', region)
             # for area in areas:
