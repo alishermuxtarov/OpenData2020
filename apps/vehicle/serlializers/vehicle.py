@@ -1,6 +1,7 @@
 from rest_framework import serializers
 
 from utils.serializers import ValidatorSerializer
+from vehicle.enums import TransmissionType, VehicleCondition
 from vehicle.models import VehicleAd
 
 
@@ -12,6 +13,15 @@ class VehicleAdSerializer(serializers.ModelSerializer):
 
 class UrlSerializer(ValidatorSerializer):
     url = serializers.URLField()
+
+
+class VehicleParametersValidator(ValidatorSerializer):
+    model_name = serializers.CharField(required=False)
+    model_id = serializers.IntegerField(required=False)
+    manufactured_year = serializers.IntegerField(allow_null=True, required=False)
+    transmission_type = serializers.ChoiceField(choices=TransmissionType.choices, required=False, allow_null=True, allow_blank=True)
+    condition = serializers.ChoiceField(choices=VehicleCondition.choices, required=False, allow_null=True, allow_blank=True)
+    driven_km = serializers.IntegerField(allow_null=True, required=False)
 
 
 class PriceRecommendationsSerializer(serializers.Serializer):

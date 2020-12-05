@@ -4,14 +4,21 @@ from django.db.models.aggregates import Count, Max, Min, Avg
 
 class VehicleAdQueryset(QuerySet):
     def similar_vehicles(self, model, manufactured_year, transmission_type, condition, driven_km):
-        return self.filter(
-            model=model,
-            # manufactured_year__in=[ad.manufactured_year - 1, ad.manufactured_year, ad.manufactured_year + 1],
-            manufactured_year=manufactured_year,
-            transmission_type=transmission_type,
-            condition=condition,
-            driven_km__range=[driven_km - 10000, driven_km + 10000]
-        )
+        qs = self.filter(model=model)
+
+        if manufactured_year:
+            qs = qs.filter(manufactured_year=manufactured_year)
+
+        if transmission_type:
+            qs = qs.filter(transmission_type=transmission_type)
+
+        if condition:
+            qs = qs.filter(condition=condition)
+
+        if driven_km:
+            qs = qs.filter(driven_km__range=[driven_km - 10000, driven_km + 10000])
+
+        return qs
 
     def define_prices(self):
         return self.aggregate(
@@ -59,16 +66,16 @@ class VehicleAdQueryset(QuerySet):
             """.format(model_id=model_id)
         )
 
-    def recommendations(self, model, manufactured_year, transmission_type, condition, driven_km):
+    def recommendations(self, model_id, manufactured_year, transmission_type, condition, driven_km):
         similar_ads = self.similar_vehicles(
-            model,
+            model_id,
             manufactured_year,
             transmission_type,
             condition,
             driven_km
         )
-        stats_by_manufactured_year = self.stats_by_model_and_manufactured_year(model)
-        stats_by_driven_km = self.stats_by_model_and_driven_km(model)
+        stats_by_manufactured_year = self.stats_by_model_and_manufactured_year(model_id)
+        stats_by_driven_km = self.stats_by_model_and_driven_km(model_id)
 
         return {
             'prices': similar_ads.define_prices(),
