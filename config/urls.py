@@ -11,10 +11,7 @@ permissions_list = [permissions.AllowAny if settings.DEBUG else permissions.IsAu
 
 urlpatterns = [
     path('', include([
-        path('docs/', include_docs_urls(
-            title='API Documentation',
-            permission_classes=permissions_list,
-        )),
+        path('docs/', include_docs_urls(title='API Documentation')),
         path('auth/', include(('authentication.urls', 'authentication'), namespace='authentication')),
         path('vehicle/', include(('vehicle.urls', 'vehicle'), namespace='vehicle')),
     ])),
