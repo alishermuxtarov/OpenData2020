@@ -9,3 +9,4 @@ pillow==7.1.1
 django-filter==2.2.0
 coreapi==2.3.3
 markdown==3.2.1
+grab==0.6.41

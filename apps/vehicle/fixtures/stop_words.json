@@ -1,0 +1,58 @@
+[
+  {
+    "model": "vehicle.stopword",
+    "pk": 1,
+    "fields": {
+      "name": "arenda"
+    }
+  },
+  {
+    "model": "vehicle.stopword",
+    "pk": 2,
+    "fields": {
+      "name": "\u0430\u0440\u0435\u043d\u0434\u0430"
+    }
+  },
+  {
+    "model": "vehicle.stopword",
+    "pk": 3,
+    "fields": {
+      "name": "\u0432\u044b\u043a\u0443\u043f"
+    }
+  },
+  {
+    "model": "vehicle.stopword",
+    "pk": 4,
+    "fields": {
+      "name": "\u0432\u0430\u0440\u0438\u0430\u043d\u0442"
+    }
+  },
+  {
+    "model": "vehicle.stopword",
+    "pk": 5,
+    "fields": {
+      "name": "\u043e\u0431\u043c\u0435\u043d"
+    }
+  },
+  {
+    "model": "vehicle.stopword",
+    "pk": 6,
+    "fields": {
+      "name": "obmen"
+    }
+  },
+  {
+    "model": "vehicle.stopword",
+    "pk": 7,
+    "fields": {
+      "name": "variant"
+    }
+  },
+  {
+    "model": "vehicle.stopword",
+    "pk": 8,
+    "fields": {
+      "name": "vikup"
+    }
+  }
+]

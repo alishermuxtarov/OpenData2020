@@ -30,7 +30,7 @@ shell_sql:
 	@python manage.py shell_plus --print-sql
 
 push:
-	git push origin $(BRANCH) || (git pull origin $(BRANCH) && git push origin $(BRANCH))
+	GIT_SSH_COMMAND='ssh -i opendata2020.uu' git push origin $(BRANCH)
 
 pull:
 	@git pull origin $(BRANCH)
