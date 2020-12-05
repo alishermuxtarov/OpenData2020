@@ -3,17 +3,25 @@ from django.db.models.aggregates import Count, Max, Min, Avg
 
 
 class VehicleAdQueryset(QuerySet):
-    def similar_vehicles(self, ad):
-        return self.filter(
-            region=ad.region,
-            area=ad.area,
+    def similar_vehicles_for(self, ad):
+        return self.similar_vehicles(
             brand=ad.brand,
             model=ad.model,
-            # manufactured_year__in=[ad.manufactured_year - 1, ad.manufactured_year, ad.manufactured_year + 1],
             manufactured_year=ad.manufactured_year,
             transmission_type=ad.transmission_type,
             condition=ad.condition,
-            driven_km__range=[ad.driven_km - 10000, ad.driven_km + 10000]
+            driven_km=ad.driven_km
+        )
+
+    def similar_vehicles(self, brand, model, manufactured_year, transmission_type, condition, driven_km):
+        return self.filter(
+            brand=brand,
+            model=model,
+            # manufactured_year__in=[ad.manufactured_year - 1, ad.manufactured_year, ad.manufactured_year + 1],
+            manufactured_year=manufactured_year,
+            transmission_type=transmission_type,
+            condition=condition,
+            driven_km__range=[driven_km - 10000, driven_km + 10000]
         )
 
     def define_prices(self):
