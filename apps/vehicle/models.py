@@ -2,6 +2,7 @@ from django.db import models
 from django.utils.translation import ugettext as _
 
 from utils.models import BaseModel
+from vehicle.querysets import VehicleAdQueryset
 
 
 class AdSource(models.TextChoices):
@@ -119,6 +120,8 @@ class VehicleAd(BaseModel):
 
     region = models.ForeignKey('reference.Region', models.CASCADE, verbose_name=_('Регион'))
     area = models.ForeignKey('reference.Area', models.CASCADE, verbose_name=_('Город/Район'))
+
+    objects = VehicleAdQueryset.as_manager()
 
     def __str__(self):
         return self.title

@@ -10,13 +10,13 @@ from rest_framework import permissions
 permissions_list = [permissions.AllowAny if settings.DEBUG else permissions.IsAuthenticated]
 
 urlpatterns = [
-    path('api/v1/', include([
+    path('', include([
         path('docs/', include_docs_urls(
             title='API Documentation',
             permission_classes=permissions_list,
         )),
-        path('auth/', include(('authentication.urls', 'authentication'),
-                              namespace='authentication')),
+        path('auth/', include(('authentication.urls', 'authentication'), namespace='authentication')),
+        path('vehicle/', include(('vehicle.urls', 'vehicle'), namespace='vehicle')),
     ])),
     path('admin/', admin.site.urls),
 ]
