@@ -6,7 +6,8 @@ from rest_framework.views import APIView
 from vehicle.management.commands.aggregate import Command
 from vehicle.models import VehicleAd, Brand
 from vehicle.serlializers.reference import ReferenceSerializer
-from vehicle.serlializers.vehicle import UrlSerializer, PriceRecommendationsSerializer, VehicleAdSerializer
+from vehicle.serlializers.vehicle import UrlSerializer, PriceRecommendationsSerializer, VehicleAdSerializer, \
+    AvgPriceByManufacturedYearSerializer, AvgPriceByDrivenKmSerializer, RecommendationSerializer
 
 
 class RecommendationsByURL(APIView):
@@ -20,11 +21,20 @@ class RecommendationsByURL(APIView):
         command.parse_url(url)
         try:
             ad = VehicleAd.objects.get(url=url)
-            similar_ads = VehicleAd.objects.similar_vehicles_for(ad)
+
+            recommendations = VehicleAd.objects.recommendations(
+                ad.model_id, ad.manufactured_year, ad.transmission_type, ad.condition, ad.driven_km
+            )
 
             result = {
-                'prices': PriceRecommendationsSerializer(similar_ads.define_prices()).data,
-                'similar_ads': VehicleAdSerializer(similar_ads, many=True).data
+                'prices': PriceRecommendationsSerializer(recommendations.get('prices')).data,
+                'similar_ads': VehicleAdSerializer(recommendations.get('similar_ads'), many=True).data,
+                'stats_by_manufactured_year': AvgPriceByManufacturedYearSerializer(
+                    recommendations.get('stats_by_manufactured_year'), many=True
+                ).data,
+                'stats_by_driven_km': AvgPriceByDrivenKmSerializer(
+                    recommendations.get('stats_by_driven_km'), many=True
+                ).data
             }
             return Response(result)
         except VehicleAd.DoesNotExist:

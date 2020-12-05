@@ -22,3 +22,22 @@ class PriceRecommendationsSerializer(serializers.Serializer):
     max_price_usd = serializers.IntegerField()
     min_price_usd = serializers.IntegerField()
     avg_price_usd = serializers.IntegerField()
+
+
+class AvgPriceByManufacturedYearSerializer(serializers.Serializer):
+    manufactured_year = serializers.IntegerField()
+    avg_price_usd = serializers.IntegerField()
+    avg_price_uzs = serializers.IntegerField()
+
+
+class AvgPriceByDrivenKmSerializer(serializers.Serializer):
+    driven_km = serializers.IntegerField()
+    avg_price_usd = serializers.IntegerField()
+    avg_price_uzs = serializers.IntegerField()
+
+
+class RecommendationSerializer(serializers.Serializer):
+    prices = PriceRecommendationsSerializer().data
+    similar_ads = VehicleAdSerializer(many=True).data
+    stats_by_manufactured_year = AvgPriceByManufacturedYearSerializer(many=True)
+    stats_by_driven_km = AvgPriceByDrivenKmSerializer(many=True).data
