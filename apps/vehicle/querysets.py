@@ -79,7 +79,8 @@ class VehicleAdQueryset(QuerySet):
 
         return {
             'prices': similar_ads.define_prices(),
-            'similar_ads': similar_ads,
+            'similar_ads': similar_ads[:20],
+            'similar_ads_total': similar_ads.count(),
             'stats_by_manufactured_year': stats_by_manufactured_year,
             'stats_by_driven_km': stats_by_driven_km
         }

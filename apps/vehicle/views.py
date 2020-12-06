@@ -29,6 +29,7 @@ class RecommendationsByURL(APIView):
             result = {
                 'prices': PriceRecommendationsSerializer(recommendations.get('prices')).data,
                 'similar_ads': VehicleAdSerializer(recommendations.get('similar_ads'), many=True).data,
+                'similar_ads_total': recommendations.get('similar_ads_total'),
                 'stats_by_manufactured_year': AvgPriceByManufacturedYearSerializer(
                     recommendations.get('stats_by_manufactured_year'), many=True
                 ).data,
@@ -83,6 +84,7 @@ class RecommendationsByParameters(APIView):
         result = {
             'prices': PriceRecommendationsSerializer(recommendations.get('prices')).data,
             'similar_ads': VehicleAdSerializer(recommendations.get('similar_ads'), many=True).data,
+            'similar_ads_total': recommendations.get('similar_ads_total'),
             'stats_by_manufactured_year': AvgPriceByManufacturedYearSerializer(
                 recommendations.get('stats_by_manufactured_year'), many=True
             ).data,
