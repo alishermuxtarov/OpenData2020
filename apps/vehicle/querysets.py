@@ -4,7 +4,7 @@ from django.db.models.aggregates import Count, Max, Min, Avg
 
 class VehicleAdQueryset(QuerySet):
     def similar_vehicles(self, model, manufactured_year, transmission_type, condition, driven_km):
-        qs = self.filter(model=model, price_usd__gte=1000)
+        qs = self.filter(model=model, price_usd__gte=1000, price_uzs__gte=10000000)
 
         if manufactured_year:
             qs = qs.filter(manufactured_year=manufactured_year)
