@@ -18,7 +18,7 @@ class VehicleAdQueryset(QuerySet):
         if driven_km:
             qs = qs.filter(driven_km__range=[driven_km - 10000, driven_km + 10000])
 
-        return qs
+        return qs.order_by('price_usd')
 
     def define_prices(self):
         return self.aggregate(
