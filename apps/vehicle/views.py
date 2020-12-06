@@ -27,6 +27,7 @@ class RecommendationsByURL(APIView):
             )
 
             result = {
+                'current_ad': VehicleAdSerializer(ad).data,
                 'prices': PriceRecommendationsSerializer(recommendations.get('prices')).data,
                 'similar_ads': VehicleAdSerializer(recommendations.get('similar_ads'), many=True).data,
                 'similar_ads_total': recommendations.get('similar_ads_total'),
